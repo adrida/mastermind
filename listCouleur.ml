@@ -78,29 +78,7 @@ let elagage comb ind l =
         then aux (l1 @ [h]) t
         else aux l1 t
   in aux [] l ;;
-(*
-let code_of_string_bis s =
-    let ls = (Str.split (Str.regexp " ") s ) in
-        let rec aux acc ls = match ls with
-            |[]-> acc
-            |h::t -> aux ((couleur(h)::acc)) t in aux [] ls;; 
 
-let code_of_string s couleur_possible = if (((code_of_string_bis s)<>[] ) && (contient couleur_possible (code_of_string_bis s)))
-                then Some(code_of_string_bis s)
-            else None;;
-
-let string_of_code code = 
-    let rec aux acc = function
-        |[] -> acc
-        |Couleur(s)::tail -> aux (s^" "^acc) tail in aux "" (code:t);;
-
-
-let rec saisie couleur_possible tailleCode = print_string("Entrer votre code : "); 
-        let s=read_line () in let codeEntre=(code_of_string s couleur_possible) in 
-            if ((codeEntre)=None) then (print_string("Saisie incorrecte (Tout écrire en minuscule ou couleurs non définies) : "); saisie couleur_possible tailleCode)
-                else if ((List.length (code_of_string_bis s))>tailleCode)  then (print_string("Saisie incorrecte (Code trop grand) : "); saisie couleur_possible tailleCode)
-                     else if ((List.length (code_of_string_bis s))<tailleCode) then (print_string("Saisie incorrecte (Code trop petit) : "); saisie couleur_possible tailleCode)
-                    else List.rev (code_of_string_bis s);;
 
  Affichage des couleurs  *)
 let rec print_list l =
