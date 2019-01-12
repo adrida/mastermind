@@ -6,8 +6,10 @@ exception Perdu;;
 	(* fonction de jeu: affichage de la propostion *)
 	(* elagage de la liste en fonction de bp et mp *)
 (* test de Perdu et combinaison caché *)
+(*-> COMPARER listeRAN et La liste que lordi teste *) 
+	let jouer_true nbcoup liste listerep= 
+	(*-> COMPARER listeRAN et La liste que lordi teste *) 
 
-	let jouer_true nbcoup liste listerep listeRAN= 
 	let rec aux n l =
 	match (n,l) with
 	|_,[]-> raise Perdu
