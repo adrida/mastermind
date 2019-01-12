@@ -7,18 +7,22 @@ exception Perdu;;
 	(* elagage de la liste en fonction de bp et mp *)
 (* test de Perdu et combinaison caché *)
 
-	let jouer_true nbcoup liste listerep = 
+	let jouer_true nbcoup liste listerep listeRAN= 
 	let rec aux n l =
 	match (n,l) with
 	|_,[]-> raise Perdu
-	|x,[h]->
+	|x,listeRAN->
 	let prop =hd l in
 	ListCouleur.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
+		Sys.command "clear";
+
 	|x,_ when x>nbcoup && nbcoup<>0->
 	print_string "Plus d'essai: PERDU!\n";
 	print_newline();
+		Sys.command "clear";
+
 	|x,_->
 	let prop=hd l in
 	print_string "Essai ";
@@ -32,7 +36,7 @@ exception Perdu;;
 	print_string "Nombre de pions(s) mal placé(s):\n";
 	let mp= snd (indications listerep liste) in
 	print_newline();
-aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
+	aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
@@ -46,9 +50,13 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	ListCouleur.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
+		Sys.command "clear";
+
 	|x,_ when x>nbcoup && nbcoup<>0->
 	print_string "Plus d'essai: PERDU!\n";
 	print_newline();
+		Sys.command "clear";
+
 	|x,_->
 	let prop=hd l in
 	print_string "Essai ";
@@ -70,85 +78,81 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	(* Menu récursif pour rejouer *)
 	(* gestion de la Perte*)
 
-	let rec menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP= 
+	let rec menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN= 
 	print_newline();
 	print_string ">>  Joueur :  ";
 	print_string nom_joueur;
 	print_string "  << \n";
 	print_string "Veuillez saisir votre combinaison  : \n";
 	print_string "pour la beta voici la lite generee randomisee  : \n";
-(*A CHANGER*)
-(*if auto == false then *)
+if auto == false then 
 	try
 	print_string "Parfait nous pouvons commencer : Le nombre de coups maximum est de : ||   ";
 	print_int coup_max;
-	print_string " coups  || \n";
-	print_string "Créez votre code et retenez le bien ! Appuyez sur 1 pour jouer sans redondance ou 2 pour jouer avec.\n  --->>>> Pour quitter tappez 0 ...\n";
+	print_string " coups  || \n\n";
+	print_string "	Créez votre code et retenez le bien !\n Appuyez sur \n -> 1 pour jouer sans redondance ou \n -> 2 pour jouer avec.\n\n\n  --->>>> Pour quitter tappez 0 ...\n";
 	let mode=read_int() in
 	match mode with
 	|2-> jouer_false coup_max listeSR listeRP;
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP  
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	|1->jouer_false coup_max listeComplete listeRP;
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
 	|0->print_string "Merci d'avoir joué!\n"
 	|_-> print_string "Erreur de choix\n";
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
 	with 
 	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
 	|Perdu -> print_string "Perdu! C'est pas bien\n";
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP;; 
-	(* else 
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN;
+else 
 	 try
 	 print_string "Parfait nous pouvons commencer : Le nombre de coups maximum est de : ||   ";
-	 print_string coup_max;
+	 print_int coup_max;
 	 print_string " coups  || \n";
-	 print_string "Vous avez choisi le mode 'true' nous allons donc générer pour vous une combinaison ! \n \n"
+	 print_string "Vous avez choisi le mode 'true' nous allons donc générer pour vous une combinaison ! \n \n";
 	 print_string " ... \n";
-	 print_string " ... \n\n";
-	 print_string " >> SUCCES, Voici votre combinaison :  \n";
-	 print_list listeComplete;
-	 print_string "Appuyez sur 1 pour jouer sans redondance ou 2 pour jouer avec.\n  --->>>> Pour quitter tappez 0 ...\n";
+	 print_string " ... \n\n\n";
+	 print_string " >> SUCCES, Voici votre combinaison :  \n\n";
+	 ListCouleur.print_list (listeRAN);
+	 print_string " \n\n\n\n";
+	 print_string "Appuyez sur \n -> 1 pour jouer sans redondance ou \n -> 2 pour jouer avec.\n\n\n  --->>>> Pour quitter tappez 0 ...\n";
 	 let mode=read_int() in
 	 match mode with
-	 |1-> jouer_true coup_max listSR listerep;
-	 menu2 nom_joueur coup_max nb_parties auto   
-	 |2->jouer_true coup_max listC listerep;
-	 menu2 nom_joueur coup_max nb_parties auto 
+	 |1-> jouer_true coup_max listeSR listeRP;
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	 |2->jouer_true coup_max listeSR listeRP;
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	 |0->print_string "Merci d'avoir joué!\n"
 	 |_-> print_string "Erreur de choix\n";
-	 menu2 nom_joueur coup_max nb_parties auto
+	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	with 
-	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; menu2 nom_joueur coup_max nb_parties auto
-	|Perdu -> print_string "Perdu! C'est pas bien\n";menu2 nom_joueur coup_max nb_parties auto;;
-	*)
+	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 		menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 
 
-(* Construction des listes de combinaison*)
+	|Perdu -> print_string "Perdu! C'est pas bien\n";		menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+
+;;
+	
+
+
+(* Construction des listes de combinaison support*)
 	let listeComplete= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
 	let listeSR= ListCouleur.construire_ListSR listeComplete ListCouleur.compList;;
-	let listeComplete1= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
+	let listeComplete1recuperee= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
+	let list_intermediaire= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
+    let listeRAN = List.nth (list_intermediaire) (Random.int (10000));;
 
-	(*
-	 let main(nom_joueur) =
-	 print_string "        Mastermind\n\n";
-	 print_string "=====   BIENVENUE A TOI ";
-	 print_string nom_joueur;
-	 print_string "   =====\n";
-	 menu listeComplete listeSR;
-	 print_string "Au revoir! \n";;
-
-	 *)
+    (* Fonction de lancement principale *)
 
 	let mastermind nom_joueur coup_max nb_parties auto =
 	Sys.command "clear";
 	print_string "MASTERMIND \n";
 	print_string "=====BIENVENUE A TOI ";
 	print_string nom_joueur;
-	print_string "   =====\n";
-	menu2 nom_joueur coup_max nb_parties auto listeComplete listeSR listeComplete1;
+	print_string "   =====\n\n\n\n";
+	menu2 nom_joueur coup_max nb_parties auto listeComplete listeSR listeComplete1recuperee listeRAN;
 	Sys.command "clear";;
 
-	(*main("Hassan");;*)
-let name = "hassan";;
-	mastermind (name) 5 1 (false);;
+let name = "Player";;
+	mastermind (name) 5 1 (true);;
