@@ -18,12 +18,10 @@ exception Perdu;;
 	ListCouleur.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
-		Sys.command "clear";
 
 	|x,_ when x>nbcoup && nbcoup<>0->
 	print_string "Plus d'essai: PERDU!\n";
 	print_newline();
-		Sys.command "clear";
 
 	|x,_->
 	let prop=hd l in
@@ -52,12 +50,14 @@ exception Perdu;;
 	ListCouleur.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
-		Sys.command "clear";
+	print_string "===================================================\n";
+	print_string "===================================================\n";
 
 	|x,_ when x>nbcoup && nbcoup<>0->
 	print_string "Plus d'essai: PERDU!\n";
 	print_newline();
-		Sys.command "clear";
+	print_string "===================================================\n";
+	print_string "===================================================\n";
 
 	|x,_->
 	let prop=hd l in
@@ -93,6 +93,8 @@ if auto == false then
 	print_int coup_max;
 	print_string " coups  || \n\n";
 	print_string "	Créez votre code et retenez le bien !\n Appuyez sur \n -> 1 pour jouer sans redondance ou \n -> 2 pour jouer avec.\n\n\n  --->>>> Pour quitter tappez 0 ...\n";
+	print_string "===================================================\n";
+	print_string "===================================================\n";
 	let mode=read_int() in
 	match mode with
 	|2-> jouer_false coup_max listeSR listeRP;
@@ -119,6 +121,8 @@ else
 	 ListCouleur.print_list (listeRAN);
 	 print_string " \n\n\n\n";
 	 print_string "Appuyez sur \n -> 1 pour jouer sans redondance ou \n -> 2 pour jouer avec.\n\n\n  --->>>> Pour quitter tappez 0 ...\n";
+	print_string "===================================================\n";
+	print_string "===================================================\n";
 	 let mode=read_int() in
 	 match mode with
 	 |1-> jouer_true coup_max listeSR listeRP;
@@ -157,4 +161,4 @@ else
 	Sys.command "clear";;
 
 let name = "Player";;
-	mastermind (name) 5 1 (true);;
+	mastermind (name) 5 1 (false);;

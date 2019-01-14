@@ -80,7 +80,7 @@ let elagage comb ind l =
   in aux [] l ;;
 
 
- Affichage des couleurs  *)
+(* Affichage des couleurs  *)
 let rec print_list l =
   match l with
   | [] -> ()
