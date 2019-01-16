@@ -40,3 +40,23 @@ val toutes_reponses : (int * int) list ;;
 *)
 val reponse : t -> t -> (int * int) option
 end ;;
+
+
+
+let couleur_to_string c = 
+  match c with 
+  |Bleu -> "Bleu;"
+  |Blanc -> "Blanc;"
+  |Rouge ->"Rouge;"
+  |Vert->"Vert "
+  |Noir->"Noir;"
+  |Violet->"Violet;"
+  |Jaune->"Jaune;"
+  |Orange->"Orange;";;
+  
+  let liste_couleur_to_string liste_couleur =
+    let rec liste_couleur_to_string_aux liste_couleur s=
+      match liste_couleur with
+      |[] -> "" 
+      |h::t -> (couleur_to_string h)^(liste_couleur_to_string_aux t s)
+    in liste_couleur_to_string_aux liste_couleur "";;
