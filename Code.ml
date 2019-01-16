@@ -10,11 +10,14 @@ val nombre_pions : int
 (** Liste des couleurs possibles *)
 val couleurs_possibles : pion list
 (** Compare deux codes
-* @param code1 premier code a comparer
-* @param code2 second code a comparer
-* @return 0 si les deux codes sont identiques,
-un entier positif si [code1] est strictement plus grand que [code2]
-un entier negatif si [code1] est strictement plus petit que [code2]
+ let rec cmp l ll = 
+match (l,ll) with
+| [], [] -> 0
+| [],_ -> -1
+| _,[] -> 1
+| (h::t), (hh::tt) -> if h > hh then 1
+                      else if h < hh then -1 
+                      else cmp t tt;;
 *)
 val compare : t -> t -> int
 (** Conversion code vers chaine de caracteres (pour affichage)
