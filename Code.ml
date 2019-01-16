@@ -26,6 +26,16 @@ val compare : t -> t -> int
 * @param code code a convertir
 * @return la representation en chaine de caracteres de [code]
 *)
+(* Création de la liste sans redondance de couleur *)
+let rec  construire_ListSR list comp =
+  let rec aux l res=
+    match l with 
+  |[]->res
+  |h::t->if not(comp h) then
+      aux t res
+    else
+      aux t (h::res)
+  in aux list []
 val string_of_code : t -> string
 (** Conversion chaine de caracteres vers code (pour saisie)
 * @param string chaine de caractere saisie
@@ -44,7 +54,7 @@ let pions_communs l1 l2 =
     | h::t -> aux t (suppression h l2)
   in (List.length l2) - (List.length (aux l1 l2));;
 
-(* Compare deux combinaisons et retourne le nombre de pions bien places *)
+(* Compare deux combinaisons et retourne le nombre de pions bien places sous la forme d'un couple (x,y) *)
 let pions_bien_places l1 l2 =
   let rec aux n l1 l2 = match l1,l2 with
     | [],_ -> n
