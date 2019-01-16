@@ -2,6 +2,7 @@
 module IA :
 sig
 (** Nombre d'algorithmes developpes *)
+(* le nombre d'algorithmes dévelopées*)
 val nombre_methodes : int
 (** Choisit un code a proposer
 * @param methode 0 pour l'algorithme naif,
