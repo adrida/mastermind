@@ -22,10 +22,14 @@ let rec couleurs_possibles listC=
       failwith "Erreur taille trop petite"
 
 val compare : t -> t -> int
-(** Conversion code vers chaine de caracteres (pour affichage)
-* @param code code a convertir
-* @return la representation en chaine de caracteres de [code]
-*)
+ let rec cmp l ll = 
+match (l,ll) with
+| [], [] -> 0
+| [],_ -> -1
+| _,[] -> 1
+| (h::t), (hh::tt) -> if h > hh then 1
+                      else if h < hh then -1 
+                      else cmp t tt;;
 (* Création de la liste sans redondance de couleur *)
 let rec  construire_ListSR list comp =
   let rec aux l res=
