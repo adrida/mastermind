@@ -2,7 +2,7 @@ open List;;
 open ListCouleur;;
 
 exception Perdu;;
-
+    (*fonction : proposition *)
 	(* fonction de jeu: affichage de la propostion *)
 	(* elagage de la liste en fonction de bp et mp *)
 (* test de Perdu et combinaison caché *)
