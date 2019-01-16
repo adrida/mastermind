@@ -25,14 +25,33 @@ val compare : t -> t -> int
 * @return la representation en chaine de caracteres de [code]
 *)
 val string_of_code : t -> string
-(** Conversion chaine de caracteres vers code (pour saisie)
-* @param string chaine de caractere saisie
-* @return le code correspondant a la saisie si la conversion est possible
-[None] si la conversion n'est pas possible
+let couleur_to_string c = 
+  match c with 
+  |Bleu -> "Bleu;"
+  |Blanc -> "Blanc;"
+  |Rouge ->"Rouge;"
+  |Vert->"Vert "
+  |Noir->"Noir;"
+  |Violet->"Violet;"
+  |Jaune->"Jaune;"
+  |Orange->"Orange;";;
 *)
 val code_of_string : string -> t option
+
+
 (** La liste de tous les codes permis *)
-val tous : t list
+val tous : t list 
+
+let rec  construire taille =
+  let rec construire_aux liste =
+    match liste with
+    |[]->[]
+    |h::t -> ((Rouge::h)::((Vert::h)::((Blanc::h)::((Noir::h)::((Bleu::h)::((Jaune::h)::((Violet::h)::((Orange::h)::(construire_aux t)))))))))
+  in match taille with
+  |1 ->[[Rouge];[Vert];[Blanc];[Noir];[Bleu];[Jaune];[Violet];[Orange]]
+  |_->construire_aux (construire(taille-1));;
+  
+  
 (** La liste de toutes les reponses possibles *)
 val toutes_reponses : (int * int) list ;;
 (** Calcule la reponse d'un code par rapport au code cache
