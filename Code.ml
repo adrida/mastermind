@@ -27,26 +27,9 @@ val string_of_code : t -> string
 * @return le code correspondant a la saisie si la conversion est possible
 [None] si la conversion n'est pas possible
 *)
-let string_of_code c = 
-  match c with 
-  |Bleu -> "Bleu;"
-  |Blanc -> "Blanc;"
-  |Rouge ->"Rouge;"
-  |Vert->"Vert "
-  |Noir->"Noir;"
-  |Violet->"Violet;"
-  |Jaune->"Jaune;"
-  |Orange->"Orange;";;
   
 val code_of_string : string -> t option
 (** La liste de tous les codes permis *)
- let code_of_string liste_couleur =
-    let rec liste_couleur_to_string_aux liste_couleur s=
-      match liste_couleur with
-      |[] -> "" 
-      |h::t -> (couleur_to_string h)^(liste_couleur_to_string_aux t s)
-    in liste_couleur_to_string_aux liste_couleur "";;
-
 val tous : t list
 (** La liste de toutes les reponses possibles *)
 val toutes_reponses : (int * int) list ;;
