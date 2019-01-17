@@ -1,14 +1,17 @@
 open List
 
-(* Création d'un module avec création type Pion et les fonctions associées *)
+(** Création d'un module avec création type Pion et les fonctions associées *)
 module Tools=struct 
 
-(* Création d'un type Pion *)
+(** Création d'un type Pion *)
 type pion= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
 
 let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 
-(* Création de la liste de coup possible avec redondance *)
+(** Création de la liste de coup possible avec redondance
+* @param taille de la liste desirer et la liste complete
+* @return genere une liste de coup possible avec redondance
+*)
 	let rec construire_ListR taille listC=
 	let rec construire_aux list= 
 	match list with
@@ -21,13 +24,20 @@ construire_aux (construire_ListR (taille-1) listC)
 	else 
 	failwith "Erreur taille trop petite"
 
-(* Création dela fonction de comparaison *)
+(** Création de la fonction de comparaison
+* @param une liste de couleur
+* @return true/false si une couleur se repete ou pas dans la liste
+*)
 	let rec compList list =
 	match list with
 	| []->true
 	|h::t-> not(mem h t) && compList t 
 
-(* Création de la liste sans redondance de Pion *)
+(** Création de la liste sans redondance de Pion
+* @param list
+* @return une liste sans repetition de couleurs
+
+*)
 	let rec  construire_ListSR list comp =
 	let rec aux l res=
 	match l with 
@@ -38,7 +48,10 @@ construire_aux (construire_ListR (taille-1) listC)
 aux t (h::res)
 	in aux list []
 
-(* Supprime la 1ere occurence de e dans l *)
+(** Supprime la 1ere occurence de e dans l
+* @param une couleur et une liste
+* @return l sans la presence de l'element e
+*)
 
 	let suppression e l =
 	let rec aux res l2 = match l2 with
@@ -46,14 +59,20 @@ aux t (h::res)
 	| h::t -> if e = h then res @ t else aux (res @ [h]) t
 	in aux [] l ;;
 
-(* Compare deux combinaisons et retourne le nombre de Pions communs *)
+(** Compare deux combinaisons et retourne le nombre de Pions communs
+* @param deux listes
+* @return le nb de pions communs
+*)
 	let pions_communs l1 l2 =
 	let rec aux l1 l2 = match l1 with
 	[] -> l2
 | h::t -> aux t (suppression h l2)
 	in (List.length l2) - (List.length (aux l1 l2));;
 
-(* Compare deux combinaisons et retourne le nombre de Pions bien places *)
+(** Compare deux combinaisons et retourne le nombre de Pions bien places
+* @param deux combinaisons
+* @return le nb de Pions bien places
+*)
 	let pions_bien_places l1 l2 =
 	let rec aux n l1 l2 = match l1,l2 with
 	| [],_->n
@@ -61,16 +80,19 @@ aux t (h::res)
 	| h1::t1,h2::t2 -> if h1 = h2 then aux (n + 1) t1 t2 else aux n t1 t2
 	in aux 0 l1 l2 ;;
 
-	(* Compare deux combinaisons et retourne un couple d'entiers (bp, mp) *)
-(* bp est le nombre de Pions bien places et mp le nombre de Pions mal places *)
+(** Compare deux combinaisons et retourne un couple d'entiers (bp, mp)
+* @param deux listes
+* @return un couple d'entiers qui designent pions bien placé/mal placé
+*)
+(** bp est le nombre de Pions bien places et mp le nombre de Pions mal places *)
 	let indications l1 l2 =
 	let bp = pions_bien_places l1 l2 in
 	let mp = (pions_communs l1 l2) - bp in (bp, mp);;
 
-	(* comb est la combinaison proposee par l'ordinateur *)
-	(* ind est le couple d'indications donnee par l'utilisateur *)
-	(* l est la liste des solutions potentielles selon l'ordinateur *)
-(* Supprime de l toutes les combinaisons qui ne peuvent etre la solution *)
+	(** comb est la combinaison proposee par l'ordinateur *)
+	(** ind est le couple d'indications donnee par l'utilisateur *)
+	(** l est la liste des solutions potentielles selon l'ordinateur *)
+(** Supprime de l toutes les combinaisons qui ne peuvent etre la solution *)
 	let elagage comb ind l =
 	let rec aux l1 l2 = match l2 with
 	[] -> l1
@@ -80,7 +102,10 @@ aux t (h::res)
 	in aux [] l ;;
 
 
-(* Affichage des Pions  *)
+(** Affichage des Pions
+* @param une liste
+* @return affiche la liste
+*)
 	let rec print_list l =
 	match l with
 | [] -> ()
