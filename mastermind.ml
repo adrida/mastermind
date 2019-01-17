@@ -1,5 +1,5 @@
 open List;;
-open tools;;
+open Tools;;
 
 exception Tricherie;;
 	(*fonction : proposition *)
@@ -15,7 +15,7 @@ exception Tricherie;;
 	|_,[]-> raise Tricherie
 	|x,listeRAN->
 	let prop =hd l in
-	tools.print_list prop;
+	Tools.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
 
@@ -28,7 +28,7 @@ exception Tricherie;;
 	print_string "Essai ";
 	print_int x;
 	print_string " : ";
-	tools.print_list prop;
+	Tools.print_list prop;
 	print_string "\n";
 	print_string "Nombre de pion(s) bien placé(s):\n";
 	try
@@ -36,7 +36,7 @@ exception Tricherie;;
 	print_string "Nombre de pions(s) mal placé(s):\n";
 	let mp= snd (indications listerep liste) in
 	print_newline();
-aux (x + 1) (tools.elagage prop (bp,mp) l)
+aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
@@ -47,7 +47,7 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 	|_,[]-> raise Tricherie
 	|x,[h]->
 	let prop =hd l in
-	tools.print_list prop;
+	Tools.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
 	print_string "===================================================\n";
@@ -64,7 +64,7 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 	print_string "Essai ";
 	print_int x;
 	print_string " : ";
-	tools.print_list prop;
+	Tools.print_list prop;
 	print_string "\n";
 	print_string "Nombre de pion(s) bien placé(s):\n";
 	try
@@ -72,7 +72,7 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 	print_string "Nombre de pions(s) mal placé(s):\n";
 	let mp=read_int() in
 	print_newline();
-aux (x + 1) (tools.elagage prop (bp,mp) l)
+aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
@@ -118,7 +118,7 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 	print_string " ... \n";
 	print_string " ... \n\n\n";
 	print_string " >> SUCCES, Voici votre combinaison :  \n\n";
-	tools.print_list (listeRAN);
+	Tools.print_list (listeRAN);
 	print_string " \n\n\n\n";
 	print_string "Appuyez sur \n -> 1 pour jouer sans redondance ou \n -> 2 pour jouer avec.\n\n\n  --->>>> Pour quitter tappez 0 ...\n";
 	print_string "===================================================\n";
@@ -143,10 +143,10 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 
 
 (* Construction des listes de combinaison support*)
-	let listeComplete= tools.construire_ListR 5 tools.listeCouleur;;
-	let listeSR= tools.construire_ListSR listeComplete tools.compList;;
-	let listeComplete1recuperee= tools.construire_ListR 5 tools.listeCouleur;;
-	let list_intermediaire= tools.construire_ListR 5 tools.listeCouleur;;
+	let listeComplete= Tools.construire_ListR 5 Tools.listePion;;
+	let listeSR= Tools.construire_ListSR listeComplete Tools.compList;;
+	let listeComplete1recuperee= Tools.construire_ListR 5 Tools.listePion;;
+	let list_intermediaire= Tools.construire_ListSR listeComplete Tools.compList;;
 	let listeRAN = List.nth (list_intermediaire) (Random.int (10000));;
 
 (* Fonction de lancement principale *)
@@ -161,5 +161,5 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 	Sys.command "clear";;
 
 	let name = "Player";;
-(*	mastermind (name) 5 1 (false);;*)
+	mastermind (name) 5 1 (false);;
 listeRAN;;
