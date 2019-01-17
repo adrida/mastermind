@@ -101,17 +101,29 @@ aux t (h::res)
 	print_list t
 	|Blanc->  print_string "Blanc ";
 	print_list t ;;
+  
 
-	let string_of_code c = 
-	match c with 
-	|Bleu -> "Bleu;"
-	|Blanc -> "Blanc;"
-	|Rouge ->"Rouge;"
-	|Vert->"Vert "
-	|Noir->"Noir;"
-	|Violet->"Violet;"
-	|Jaune->"Jaune;"
-	|Orange->"Orange;";;
+let string_of_code c = 
+  let rec stoc l =
+  match l with
+| [] -> ()
+  | h::t -> match h with
+  |Rouge->  "Rouge ";
+  stoc t
+  |Bleu ->  "Bleu ";
+  stoc t
+  |Vert-> "Vert ";
+  stoc t
+  |Noir-> "Noir ";
+  stoc t
+  |Jaune->  "Jaune ";
+  stoc t
+  |Orange-> "Orange ";
+  stoc t
+  |Violet-> "Violet ";
+  stoc t
+  |Blanc-> "Blanc ";
+  stoc t ;;
 
 	let code_of_string liste_couleur =
 	let rec liste_couleur_to_string_aux liste_couleur s=
