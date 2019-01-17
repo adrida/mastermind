@@ -81,7 +81,7 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	(** Menu récursif pour rejouer *)
 (** gestion de la Perte*)
 
-	let rec menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN= 
+	let rec menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN= 
 	print_newline();
 	print_string ">>  Joueur :  ";
 	print_string nom_joueur;
@@ -99,17 +99,17 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	let mode=read_int() in
 	match mode with
 	|2-> jouer_false coup_max listeSR listeRP;
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	|1->jouer_false coup_max listeComplete listeRP;
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
 	|0->print_string "Merci d'avoir joué!\n"
 	|_-> print_string "Erreur de choix\n";
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
 	with 
 	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
 	|Tricherie -> print_string "Tricherie! C'est pas bien\n";
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN;
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN;
 	else 
 	try
 	print_string "Parfait nous pouvons commencer : Le nombre de coups maximum est de : ||   ";
@@ -127,17 +127,17 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	let mode=read_int() in
 	match mode with
 	|1-> jouer_true coup_max listeSR listeRP;
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	|2->jouer_true coup_max listeSR listeRP;
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	|0->print_string "Merci d'avoir joué!\n"
 	|_-> print_string "Erreur de choix\n";
-	menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 	with 
-	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 		menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 		menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 
 
-	|Tricherie -> print_string "Tricherie! C'est pas bien\n";		menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	|Tricherie -> print_string "Tricherie! C'est pas bien\n";		menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 
 	;;
 
@@ -161,7 +161,7 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	print_string "=====BIENVENUE A TOI ";
 	print_string nom_joueur;
 	print_string "   =====\n\n\n\n";
-	menu2 nom_joueur coup_max nb_parties auto listeComplete listeSR listeComplete1recuperee listeRAN;
+	menu nom_joueur coup_max nb_parties auto listeComplete listeSR listeComplete1recuperee listeRAN;
 	Sys.command "clear";;
 
 	let name = "Player";;
