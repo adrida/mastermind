@@ -161,4 +161,5 @@ aux (x + 1) (tools.elagage prop (bp,mp) l)
 	Sys.command "clear";;
 
 	let name = "Player";;
-	mastermind (name) 5 1 (false);;
+(*	mastermind (name) 5 1 (false);;*)
+listeRAN;;

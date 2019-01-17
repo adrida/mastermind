@@ -1,7 +1,7 @@
 open List
 
 (* Création d'un module avec création type Pion et les fonctions associées *)
-module ListPion=struct 
+module Tools=struct 
 
 (* Création d'un type Pion *)
 type pion= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
