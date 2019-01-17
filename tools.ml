@@ -4,7 +4,7 @@ open List
 module ListPion=struct 
 
 (* Création d'un type Pion *)
-type Pion= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
+type pion= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
 
 let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 
@@ -47,14 +47,14 @@ aux t (h::res)
 	in aux [] l ;;
 
 (* Compare deux combinaisons et retourne le nombre de Pions communs *)
-	let Pions_communs l1 l2 =
+	let pions_communs l1 l2 =
 	let rec aux l1 l2 = match l1 with
 	[] -> l2
 | h::t -> aux t (suppression h l2)
 	in (List.length l2) - (List.length (aux l1 l2));;
 
 (* Compare deux combinaisons et retourne le nombre de Pions bien places *)
-	let Pions_bien_places l1 l2 =
+	let pions_bien_places l1 l2 =
 	let rec aux n l1 l2 = match l1,l2 with
 	| [],_ -> n
 	|_,[]->n
@@ -64,8 +64,8 @@ aux t (h::res)
 	(* Compare deux combinaisons et retourne un couple d'entiers (bp, mp) *)
 (* bp est le nombre de Pions bien places et mp le nombre de Pions mal places *)
 	let indications l1 l2 =
-	let bp = Pions_bien_places l1 l2 in
-	let mp = (Pions_communs l1 l2) - bp in (bp, mp);;
+	let bp = pions_bien_places l1 l2 in
+	let mp = (pions_communs l1 l2) - bp in (bp, mp);;
 
 	(* comb est la combinaison proposee par l'ordinateur *)
 	(* ind est le couple d'indications donnee par l'utilisateur *)
@@ -102,7 +102,7 @@ aux t (h::res)
 	|Blanc->  print_string "Blanc ";
 	print_list t ;;
   
-
+(*
 let string_of_code c = 
   let rec stoc l =
   match l with
@@ -123,8 +123,8 @@ let string_of_code c =
   |Violet-> "Violet ";
   stoc t
   |Blanc-> "Blanc ";
-  stoc t ;;
-
+  stoc t ;; *)
+(*
 	let code_of_string liste_Pion =
 	let rec liste_Pion_to_string_aux liste_Pion s=
 	match liste_Pion with
@@ -132,6 +132,6 @@ let string_of_code c =
 |h::t -> (Pion_to_string h)^(liste_Pion_to_string_aux t s)
 	in liste_Pion_to_string_aux liste_Pion "";;
 
-
+*)
 
 	end ;;
