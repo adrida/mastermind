@@ -2,13 +2,14 @@ open List;;
 open Tools;;
 
 exception Tricherie;;
-	(*fonction : proposition *)
-	(* fonction de jeu: affichage de la propostion *)
-	(* elagage de la liste en fonction de bp et mp *)
-	(* test de Tricherie et combinaison caché *)
-(*-> COMPARER listeRAN et La liste que lordi teste *) 
+	(**fonction : proposition *)
+	(** fonction de jeu: affichage de la propostion *)
+	(** test Tricherie et combinaison caché *)
+	(** elagage de la liste en fonction de bp et mp *)
+
+(**-> COMPARER listeRAN et La liste que lordi teste *) 
 	let jouer_true nbcoup liste listerep= 
-(*-> COMPARER listeRAN et La liste que lordi teste *) 
+(**-> COMPARER listeRAN et La liste que lordi teste *) 
 
 	let rec aux n l =
 	match (n,l) with
@@ -77,8 +78,8 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	in aux 1 liste;;
 
 
-	(* Menu récursif pour rejouer *)
-(* gestion de la Perte*)
+	(** Menu récursif pour rejouer *)
+(** gestion de la Perte*)
 
 	let rec menu2 nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN= 
 	print_newline();
@@ -142,14 +143,17 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 
 
 
-(* Construction des listes de combinaison support*)
+(** Construction des listes de combinaison support*)
 	let listeComplete= Tools.construire_ListR 5 Tools.listePion;;
 	let listeSR= Tools.construire_ListSR listeComplete Tools.compList;;
 	let listeComplete1recuperee= Tools.construire_ListR 5 Tools.listePion;;
 	let list_intermediaire= Tools.construire_ListSR listeComplete Tools.compList;;
 	let listeRAN = List.nth (list_intermediaire) (Random.int (10000));;
 
-(* Fonction de lancement principale *)
+(** Fonction de lancement principale
+* @param nom du joueur, le nb de coups et de parties, true : sans intervention du joueur et false : avec intervention
+* @return le jeux 
+*)
 
 	let mastermind nom_joueur coup_max nb_parties auto =
 	Sys.command "clear";
@@ -161,5 +165,5 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	Sys.command "clear";;
 
 	let name = "Player";;
-(*	mastermind (name) 5 1 (false);;
+(**	mastermind (name) 5 1 (false);;
 *)
