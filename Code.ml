@@ -37,9 +37,10 @@ let string_of_code c =
   |Violet->"Violet;"
   |Jaune->"Jaune;"
   |Orange->"Orange;";;
+  
 val code_of_string : string -> t option
 (** La liste de tous les codes permis *)
- let liste_couleur_to_string liste_couleur =
+ let code_of_string liste_couleur =
     let rec liste_couleur_to_string_aux liste_couleur s=
       match liste_couleur with
       |[] -> "" 
