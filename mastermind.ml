@@ -1,5 +1,5 @@
 open List;;
-open ListCouleur;;
+open tools;;
 
 exception Perdu;;
 	(*fonction : proposition *)
@@ -15,7 +15,7 @@ exception Perdu;;
 	|_,[]-> raise Perdu
 	|x,listeRAN->
 	let prop =hd l in
-	ListCouleur.print_list prop;
+	tools.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
 
@@ -28,7 +28,7 @@ exception Perdu;;
 	print_string "Essai ";
 	print_int x;
 	print_string " : ";
-	ListCouleur.print_list prop;
+	tools.print_list prop;
 	print_string "\n";
 	print_string "Nombre de pion(s) bien placé(s):\n";
 	try
@@ -36,7 +36,7 @@ exception Perdu;;
 	print_string "Nombre de pions(s) mal placé(s):\n";
 	let mp= snd (indications listerep liste) in
 	print_newline();
-aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
+aux (x + 1) (tools.elagage prop (bp,mp) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
@@ -47,7 +47,7 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	|_,[]-> raise Perdu
 	|x,[h]->
 	let prop =hd l in
-	ListCouleur.print_list prop;
+	tools.print_list prop;
 	print_string "est la bonne combinaison !\n";
 	print_newline();
 	print_string "===================================================\n";
@@ -64,7 +64,7 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	print_string "Essai ";
 	print_int x;
 	print_string " : ";
-	ListCouleur.print_list prop;
+	tools.print_list prop;
 	print_string "\n";
 	print_string "Nombre de pion(s) bien placé(s):\n";
 	try
@@ -72,7 +72,7 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	print_string "Nombre de pions(s) mal placé(s):\n";
 	let mp=read_int() in
 	print_newline();
-aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
+aux (x + 1) (tools.elagage prop (bp,mp) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
@@ -118,7 +118,7 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 	print_string " ... \n";
 	print_string " ... \n\n\n";
 	print_string " >> SUCCES, Voici votre combinaison :  \n\n";
-	ListCouleur.print_list (listeRAN);
+	tools.print_list (listeRAN);
 	print_string " \n\n\n\n";
 	print_string "Appuyez sur \n -> 1 pour jouer sans redondance ou \n -> 2 pour jouer avec.\n\n\n  --->>>> Pour quitter tappez 0 ...\n";
 	print_string "===================================================\n";
@@ -143,10 +143,10 @@ aux (x + 1) (ListCouleur.elagage prop (bp,mp) l)
 
 
 (* Construction des listes de combinaison support*)
-	let listeComplete= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
-	let listeSR= ListCouleur.construire_ListSR listeComplete ListCouleur.compList;;
-	let listeComplete1recuperee= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
-	let list_intermediaire= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
+	let listeComplete= tools.construire_ListR 5 tools.listeCouleur;;
+	let listeSR= tools.construire_ListSR listeComplete tools.compList;;
+	let listeComplete1recuperee= tools.construire_ListR 5 tools.listeCouleur;;
+	let list_intermediaire= tools.construire_ListR 5 tools.listeCouleur;;
 	let listeRAN = List.nth (list_intermediaire) (Random.int (10000));;
 
 (* Fonction de lancement principale *)

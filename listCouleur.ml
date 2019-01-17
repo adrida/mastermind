@@ -1,12 +1,12 @@
 open List
 
-(* Création d'un module avec création type couleur et les fonctions associées *)
-module ListCouleur=struct 
+(* Création d'un module avec création type Pion et les fonctions associées *)
+module ListPion=struct 
 
-(* Création d'un type couleur *)
-type couleur= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
+(* Création d'un type Pion *)
+type Pion= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
 
-let listeCouleur= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
+let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 
 (* Création de la liste de coup possible avec redondance *)
 	let rec construire_ListR taille listC=
@@ -27,7 +27,7 @@ construire_aux (construire_ListR (taille-1) listC)
 	| []->true
 	|h::t-> not(mem h t) && compList t 
 
-(* Création de la liste sans redondance de couleur *)
+(* Création de la liste sans redondance de Pion *)
 	let rec  construire_ListSR list comp =
 	let rec aux l res=
 	match l with 
@@ -46,15 +46,15 @@ aux t (h::res)
 	| h::t -> if e = h then res @ t else aux (res @ [h]) t
 	in aux [] l ;;
 
-(* Compare deux combinaisons et retourne le nombre de pions communs *)
-	let pions_communs l1 l2 =
+(* Compare deux combinaisons et retourne le nombre de Pions communs *)
+	let Pions_communs l1 l2 =
 	let rec aux l1 l2 = match l1 with
 	[] -> l2
 | h::t -> aux t (suppression h l2)
 	in (List.length l2) - (List.length (aux l1 l2));;
 
-(* Compare deux combinaisons et retourne le nombre de pions bien places *)
-	let pions_bien_places l1 l2 =
+(* Compare deux combinaisons et retourne le nombre de Pions bien places *)
+	let Pions_bien_places l1 l2 =
 	let rec aux n l1 l2 = match l1,l2 with
 	| [],_ -> n
 	|_,[]->n
@@ -62,10 +62,10 @@ aux t (h::res)
 	in aux 0 l1 l2 ;;
 
 	(* Compare deux combinaisons et retourne un couple d'entiers (bp, mp) *)
-(* bp est le nombre de pions bien places et mp le nombre de pions mal places *)
+(* bp est le nombre de Pions bien places et mp le nombre de Pions mal places *)
 	let indications l1 l2 =
-	let bp = pions_bien_places l1 l2 in
-	let mp = (pions_communs l1 l2) - bp in (bp, mp);;
+	let bp = Pions_bien_places l1 l2 in
+	let mp = (Pions_communs l1 l2) - bp in (bp, mp);;
 
 	(* comb est la combinaison proposee par l'ordinateur *)
 	(* ind est le couple d'indications donnee par l'utilisateur *)
@@ -80,7 +80,7 @@ aux t (h::res)
 	in aux [] l ;;
 
 
-(* Affichage des couleurs  *)
+(* Affichage des Pions  *)
 	let rec print_list l =
 	match l with
 | [] -> ()
@@ -125,12 +125,12 @@ let string_of_code c =
   |Blanc-> "Blanc ";
   stoc t ;;
 
-	let code_of_string liste_couleur =
-	let rec liste_couleur_to_string_aux liste_couleur s=
-	match liste_couleur with
+	let code_of_string liste_Pion =
+	let rec liste_Pion_to_string_aux liste_Pion s=
+	match liste_Pion with
 	|[] -> "" 
-|h::t -> (couleur_to_string h)^(liste_couleur_to_string_aux t s)
-	in liste_couleur_to_string_aux liste_couleur "";;
+|h::t -> (Pion_to_string h)^(liste_Pion_to_string_aux t s)
+	in liste_Pion_to_string_aux liste_Pion "";;
 
 
 
