@@ -106,7 +106,7 @@ aux t (h::res)
 let string_of_code c = 
   let rec stoc l =
   match l with
-| [] -> ()
+  | [] -> ()
   | h::t -> match h with
   |Rouge->  "Rouge ";
   stoc t
@@ -118,20 +118,21 @@ let string_of_code c =
   stoc t
   |Jaune->  "Jaune ";
   stoc t
-  |Orange-> "Orange ";
-  stoc t
-  |Violet-> "Violet ";
-  stoc t
-  |Blanc-> "Blanc ";
-  stoc t ;; *)
-(*
+    |Orange-> "Orange ";
+    stoc t
+    |Violet-> "Violet ";
+    stoc t
+    |Blanc-> "Blanc ";
+    stoc t 
+  in stoc c;; 
+*)
 	let code_of_string liste_Pion =
 	let rec liste_Pion_to_string_aux liste_Pion s=
 	match liste_Pion with
 	|[] -> "" 
-|h::t -> (Pion_to_string h)^(liste_Pion_to_string_aux t s)
+  |h::t -> (code_of_string h)^(liste_Pion_to_string_aux t s)
 	in liste_Pion_to_string_aux liste_Pion "";;
 
-*)
+
 
 	end ;;
