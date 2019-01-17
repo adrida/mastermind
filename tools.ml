@@ -56,7 +56,7 @@ aux t (h::res)
 (* Compare deux combinaisons et retourne le nombre de Pions bien places *)
 	let pions_bien_places l1 l2 =
 	let rec aux n l1 l2 = match l1,l2 with
-	| [],_ -> n
+	| [],_->n
 	|_,[]->n
 	| h1::t1,h2::t2 -> if h1 = h2 then aux (n + 1) t1 t2 else aux n t1 t2
 	in aux 0 l1 l2 ;;
@@ -102,37 +102,25 @@ aux t (h::res)
 	|Blanc->  print_string "Blanc ";
 	print_list t ;;
   
-(*
+
 let string_of_code c = 
   let rec stoc l =
   match l with
   | [] -> ()
   | h::t -> match h with
   |Rouge->  "Rouge ";
-  stoc t
   |Bleu ->  "Bleu ";
-  stoc t
   |Vert-> "Vert ";
-  stoc t
   |Noir-> "Noir ";
-  stoc t
   |Jaune->  "Jaune ";
-  stoc t
     |Orange-> "Orange ";
-    stoc t
     |Violet-> "Violet ";
-    stoc t
     |Blanc-> "Blanc ";
-    stoc t 
-  in stoc c;; 
-*)
+
 	let code_of_string liste_Pion =
 	let rec liste_Pion_to_string_aux liste_Pion s=
 	match liste_Pion with
 	|[] -> "" 
-  |h::t -> (code_of_string h)^(liste_Pion_to_string_aux t s)
+  |h::t -> (string_of_code h)^(liste_Pion_to_string_aux t s)
 	in liste_Pion_to_string_aux liste_Pion "";;
-
-
-
 	end ;;
