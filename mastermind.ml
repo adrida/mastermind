@@ -1,17 +1,16 @@
 open List;;
 open Tools;;
 
-exception Tricherie;;
+exception Triche;;
 	(**fonction : proposition *)
 	(** fonction de jeu: affichage de la propostion *)
-	(** test Tricherie et combinaison caché *)
 	(** resolution de la liste en fonction de pl_corr et pl_mauvais *)
 
 (**-> COMPARER listeRAN et La liste que lordi teste *) 
 	let jouer_true nbcoup liste listerep= 
 	let rec aux n l =
 	match (n,l) with
-	|_,[]-> raise Tricherie
+	|_,[]-> raise Triche
 	|x,listeRAN->
 	let prop =hd l in
 	Tools.print_list prop;
@@ -19,7 +18,7 @@ exception Tricherie;;
 	print_newline();
 
 	|x,_ when x > nbcoup && nbcoup <> 0->
-	print_string "Plus d'essai: Tricherie!\n";
+	print_string "Plus d'essai: Triche!\n";
 	print_newline();
 
 	|x,_->
@@ -43,7 +42,7 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	let jouer_false nbcoup liste listerep =
 	let rec aux n l =
 	match (n,l) with
-	|_,[]-> raise Tricherie
+	|_,[]-> raise Triche
 	|x,[h]->
 	let prop =hd l in
 	Tools.print_list prop;
@@ -53,7 +52,7 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	print_string "===================================================\n";
 
 	|x,_ when x>nbcoup && nbcoup<>0->
-	print_string "Plus d'essai: Tricherie!\n";
+	print_string "Plus d'essai: Triche!\n";
 	print_newline();
 	print_string "===================================================\n";
 	print_string "===================================================\n";
@@ -106,7 +105,7 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	with 
 	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 
 	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN
-	|Tricherie -> print_string "Tricherie! C'est pas bien\n";
+	|Triche -> print_string "Triche! C'est pas bien\n";
 	menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN;
 	else 
 	try
@@ -135,7 +134,7 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	|Failure("int_of_string")-> print_string "Erreur de saisie!\n"; 		menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 
 
-	|Tricherie -> print_string "Tricherie! C'est pas bien\n";		menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
+	|Triche -> print_string "Triche! C'est pas bien\n";		menu nom_joueur coup_max nb_parties auto listeSR listeComplete listeRP listeRAN  
 
 	;;
 
