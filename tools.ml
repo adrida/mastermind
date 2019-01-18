@@ -67,8 +67,6 @@ aux t (h::res)
 	|_,[]->n
 	| h1::t1,h2::t2 -> if h1 = h2 then aux (n + 1) t1 t2 else aux n t1 t2 in aux 0 l1 l2 ;;
 
-
-
 (** Compare deux combinaisons et retourne le nombre de Pions communs
 * @param deux listes
 * @return le nb de pions communs
