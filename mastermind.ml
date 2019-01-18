@@ -2,6 +2,8 @@ open List;;
 open Tools;;
 
 exception Triche;;
+exception Start;;
+
 	(**fonction : proposition *)
 	(** fonction de jeu: affichage de la propostion *)
 	(** resolution de la liste en fonction de pl_corr et pl_mauvais *)
@@ -82,9 +84,10 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	print_newline();
 	print_string ">>  Joueur :  ";
 	print_string nom_joueur;
-	print_string "  << \n";
-	print_string "Veuillez saisir votre combinaison  : \n";
-	print_string "pour la beta voici la lite generee randomisee  : \n";
+	print_string "  << \n\n";
+	print_string "     /!\\  Normalement a ce moment l'utilisateur saisit la combinaison /!\\ \n\n";
+	print_string "Creez une combinaison et retenez la bien    !!!!! \n\n";
+
 	if auto == false then 
 	try
 	print_string "Parfait nous pouvons commencer : Le nombre de coups maximum est de : ||   ";
@@ -140,12 +143,13 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 
 
 
-(** Construction des listes de combinaison support*)
-	let listeComplete= Tools.construire_ListR 5 Tools.listePion;;
-	let listeSR= Tools.construire_ListSR listeComplete Tools.compList;;
-	let listeComplete1recuperee= Tools.construire_ListR 5 Tools.listePion;;
-	let list_intermediaire= Tools.construire_ListSR listeComplete Tools.compList;;
-	let listeRAN = List.nth (list_intermediaire) (Random.int (10000));;
+(** Construction des listes de combinaison support et exception Start pour forcer le programmme a compiler*)
+	let listeComplete= Tools.avec_redondance 5 Tools.listePion;;
+	let listeSR= Tools.sans_redondance listeComplete Tools.compList;;
+	let listeComplete1recuperee= Tools.avec_redondance 5 Tools.listePion;;
+	let list_intermediaire= Tools.sans_redondance listeComplete Tools.compList;;
+	let listeRAN = List.nth (list_intermediaire) (1);;
+
 
 (** Fonction de lancement principale
 * @param nom du joueur, le nb de coups et de parties, true : sans intervention du joueur et false : avec intervention
@@ -161,6 +165,3 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	menu nom_joueur coup_max nb_parties auto listeComplete listeSR listeComplete1recuperee listeRAN;
 	Sys.command "clear";;
 
-	let name = "Player";;
-(**	mastermind (name) 5 1 (false);;
-*)

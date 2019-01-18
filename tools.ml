@@ -12,7 +12,7 @@ let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 * @param taille de la liste desirer et la liste complete
 * @return genere une liste de coup possible avec redondance
 *)
-	let rec construire_ListR taille listC=
+	let rec avec_redondance taille listC=
 	let rec construire_aux list= 
 	match list with
 	|[]->[]
@@ -20,7 +20,7 @@ let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 	in match taille with 
 	|1 -> listC
 	|_-> if taille>=1 then
-construire_aux (construire_ListR (taille-1) listC)
+construire_aux (avec_redondance (taille-1) listC)
 	else 
 	failwith "Erreur taille trop petite"
 
@@ -38,7 +38,7 @@ construire_aux (construire_ListR (taille-1) listC)
 * @return une liste sans repetition de couleurs
 
 *)
-	let rec  construire_ListSR list comp =
+	let rec  sans_redondance list comp =
 	let rec aux l res=
 	match l with 
 	|[]->res
