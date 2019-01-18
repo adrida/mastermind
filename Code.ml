@@ -27,9 +27,28 @@ type pion = (* A COMPLETER *)
  * @return le code correspondant a la saisie si la conversion est possible
  [None] si la conversion n'est pas possible
  *)
+	let string_of_code c = 
+	match c with
+| [] -> ()
+	| h::t -> match h with
+	|Rouge->  "Rouge ";
+	|Bleu ->  "Bleu ";
+	|Vert-> "Vert ";
+	|Noir-> "Noir ";
+	|Jaune->  "Jaune ";
+	|Orange-> "Orange ";
+	|Violet-> "Violet ";
+	|Blanc-> "Blanc ";
 
 	val code_of_string : string -> t option
 (** La liste de tous les codes permis *)
+	let code_of_string liste_Pion =
+	let rec liste_Pion_to_string_aux liste_Pion s=
+	match liste_Pion with
+	|[] -> "" 
+|h::t -> (string_of_code h)^(liste_Pion_to_string_aux t s)
+	in liste_Pion_to_string_aux liste_Pion "";;
+
 	val tous : t list
 (** La liste de toutes les reponses possibles *)
 	val toutes_reponses : (int * int) list ;;

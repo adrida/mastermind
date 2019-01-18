@@ -9,12 +9,12 @@ type pion= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
 let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 
 (** Création de la liste de coup possible avec redondance
-* @param taille de la liste desirer et la liste complete
-* @return genere une liste de coup possible avec redondance
-*)
-	let rec avec_redondance taille listC=
-	let rec construire_aux list= 
-	match list with
+ * @param taille de la liste desirer et la liste complete
+ * @return genere une liste de coup possible avec redondance
+ *)
+let rec avec_redondance taille listC=
+let rec construire_aux list= 
+match list with
 	|[]->[]
 |h::t->(Rouge::h)::(Bleu::h)::(Vert::h)::(Noir::h)::(Jaune::h)::(Orange::h)::(Violet::h)::(Blanc::h)::(construire_aux t)
 	in match taille with 
@@ -24,20 +24,20 @@ construire_aux (avec_redondance (taille-1) listC)
 	else 
 	failwith "Erreur de taille"
 
-(** Création de la fonction de comparaison
-* @param une liste de couleur
-* @return true/false si une couleur se repete ou pas dans la liste
-*)
+	(** Création de la fonction de comparaison
+	 * @param une liste de couleur
+	 * @return true/false si une couleur se repete ou pas dans la liste
+	 *)
 	let rec compList list =
 	match list with
 	| []->true
 	|h::t-> not(mem h t) && compList t 
 
-(** Création de la liste sans redondance de Pion
-* @param list
-* @return une liste sans repetition de couleurs
+	(** Création de la liste sans redondance de Pion
+	 * @param list
+	 * @return une liste sans repetition de couleurs
 
-*)
+	 *)
 	let rec  sans_redondance list comp =
 	let rec aux l res=
 	match l with 
@@ -47,10 +47,10 @@ construire_aux (avec_redondance (taille-1) listC)
 	else
 aux t (h::res)
 	in aux list []
-(** Supprime la 1ere occurence de e dans l
-* @param une couleur et une liste
-* @return l sans la presence de l'element e
-*)
+	(** Supprime la 1ere occurence de e dans l
+	 * @param une couleur et une liste
+	 * @return l sans la presence de l'element e
+	 *)
 
 	let ft_list_del e l =
 	let rec aux res l2 = match l2 with
@@ -58,19 +58,19 @@ aux t (h::res)
 	| h::t -> if e = h then res @ t else aux (res @ [h]) t
 	in aux [] l ;;
 
-(** Compare deux combinaisons et retourne le nombre de Pions bien places
-* @param deux combinaisons
-* @return le nb de Pions bien places
-*)
+	(** Compare deux combinaisons et retourne le nombre de Pions bien places
+	 * @param deux combinaisons
+	 * @return le nb de Pions bien places
+	 *)
 	let ft_get_pl_corr l1 l2 =let rec aux n l1 l2 = match l1,l2 with
 	| [],_->n
 	|_,[]->n
 	| h1::t1,h2::t2 -> if h1 = h2 then aux (n + 1) t1 t2 else aux n t1 t2 in aux 0 l1 l2 ;;
 
-(** Compare deux combinaisons et retourne le nombre de Pions communs
-* @param deux listes
-* @return le nb de pions communs
-*)
+	(** Compare deux combinaisons et retourne le nombre de Pions communs
+	 * @param deux listes
+	 * @return le nb de pions communs
+	 *)
 	let ft_common l1 l2 =
 	let rec aux l1 l2 = match l1 with
 	[] -> l2
@@ -78,10 +78,10 @@ aux t (h::res)
 	in (List.length l2) - (List.length (aux l1 l2));;
 
 
-(** Compare deux combinaisons et retourne un couple d'entiers (pl_corr, pl_mauvais)
-* @param deux listes
-* @return un couple d'entiers qui designent pions bien placé/mal placé
-*)
+	(** Compare deux combinaisons et retourne un couple d'entiers (pl_corr, pl_mauvais)
+	 * @param deux listes
+	 * @return un couple d'entiers qui designent pions bien placé/mal placé
+	 *)
 (** pl_corr est le nombre de Pions bien places et pl_mauvais le nombre de Pions mal places *)
 	let ft_data_game l1 l2 = let pl_corr = ft_get_pl_corr l1 l2 in let pl_mauvais = (ft_common l1 l2) - pl_corr in (pl_corr, pl_mauvais);;
 
@@ -98,10 +98,10 @@ aux t (h::res)
 	in aux [] l ;;
 
 
-(** Affichage des Pions
-* @param une liste
-* @return affiche la liste
-*)
+	(** Affichage des Pions
+	 * @param une liste
+	 * @return affiche la liste
+	 *)
 	let rec print_list l =
 	match l with
 | [] -> ()
@@ -122,27 +122,26 @@ aux t (h::res)
 	print_list t
 	|Blanc->  print_string "Blanc ";
 	print_list t ;;
-  
-(*
 
-let string_of_code c = 
-  let rec stoc l =
-  match l with
-  | [] -> ()
-  | h::t -> match h with
-  |Rouge->  "Rouge ";
-  |Bleu ->  "Bleu ";
-  |Vert-> "Vert ";
-  |Noir-> "Noir ";
-  |Jaune->  "Jaune ";
-  |Orange-> "Orange ";
-  |Violet-> "Violet ";
-  |Blanc-> "Blanc ";
+	(*
 
-	let code_of_string liste_Pion =
-	let rec liste_Pion_to_string_aux liste_Pion s=
-	match liste_Pion with
-	|[] -> "" 
-  |h::t -> (string_of_code h)^(liste_Pion_to_string_aux t s)
-	in liste_Pion_to_string_aux liste_Pion "";;*)
+	 let string_of_code c = 
+	 match c with
+	 | [] -> ()
+	 | h::t -> match h with
+	 |Rouge->  "Rouge ";
+	 |Bleu ->  "Bleu ";
+	 |Vert-> "Vert ";
+	 |Noir-> "Noir ";
+	 |Jaune->  "Jaune ";
+	 |Orange-> "Orange ";
+	 |Violet-> "Violet ";
+	 |Blanc-> "Blanc ";
+
+	 let code_of_string liste_Pion =
+	 let rec liste_Pion_to_string_aux liste_Pion s=
+	 match liste_Pion with
+	 |[] -> "" 
+	 |h::t -> (string_of_code h)^(liste_Pion_to_string_aux t s)
+	 in liste_Pion_to_string_aux liste_Pion "";;*)
 	end ;;

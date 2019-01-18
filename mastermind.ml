@@ -6,7 +6,7 @@ exception Start;;
 
 	(**fonction : proposition *)
 	(** fonction de jeu: affichage de la propostion *)
-	(** resolution de la liste en fonction de pl_corr et pl_mauvais *)
+(** resolution de la liste en fonction de pl_corr et pl_mauvais *)
 
 (**-> COMPARER listeRAN et La liste que lordi teste *) 
 	let jouer_true nbcoup liste listerep= 
@@ -151,10 +151,10 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	let listeRAN = List.nth (list_intermediaire) (1);;
 
 
-(** Fonction de lancement principale
-* @param nom du joueur, le nb de coups et de parties, true : sans intervention du joueur et false : avec intervention
-* @return le jeux 
-*)
+	(** Fonction de lancement principale
+	 * @param nom du joueur, le nb de coups et de parties, true : sans intervention du joueur et false : avec intervention
+	 * @return le jeux 
+	 *)
 
 
 	let mastermind nom_joueur coup_max nb_parties auto =
@@ -167,15 +167,15 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	Sys.command "clear";;
 
 	(** commandes pour plus de claretee dans l'affichage
-	*)
+	 *)
 	Sys.command "clear";;
 	print_string "\n\n /!\\ >> Pour lancer une partie appeler sur la console ocaml la fonction mastermind de cette maniere :  \n\n
-	  >> # mastermind nom_joueur coup_max nb_parties auto \n\n
-	  nom_joueur : Votre nom ;) \n
-	  coup_max : Le nombre de coups maximum pour deviner le code \n
-	  nb_parties : Le nombre de parties souhaitees (PAS IMPLEMENTE POUR L'INSTANT) \n
-	  auto : true ou false - permet de preciser si vous voulez que les reponses soient calculees de maniere automatiques ou non \n
-	               ---> ATTENTION SEUL LE MODE FALSE FONCTIONNE \n\n";;
+	>> # mastermind nom_joueur coup_max nb_parties auto \n\n
+	nom_joueur : Votre nom ;) \n
+	coup_max : Le nombre de coups maximum pour deviner le code \n
+	nb_parties : Le nombre de parties souhaitees (PAS IMPLEMENTE POUR L'INSTANT) \n
+	auto : true ou false - permet de preciser si vous voulez que les reponses soient calculees de maniere automatiques ou non \n
+	---> ATTENTION SEUL LE MODE FALSE FONCTIONNE \n\n";;
 
 
 
