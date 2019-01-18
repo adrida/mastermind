@@ -21,14 +21,14 @@ type pion = (* A COMPLETER *)
  * @param code code a convertir
  * @return la representation en chaine de caracteres de [code]
  *)
- let rec cmp l ll = 
-match (l,ll) with
-| [], [] -> 0
-| [],_ -> -1
-| _,[] -> 1
-| (h::t), (hh::tt) -> if h > hh then 1
-                      else if h < hh then -1 
-                      else cmp t tt;;
+	let rec cmp l ll = 
+	match (l,ll) with
+	| [], [] -> 0
+	| [],_ -> -1
+	| _,[] -> 1
+	| (h::t), (hh::tt) -> if h > hh then 1
+	else if h < hh then -1 
+	else cmp t tt;;
 
 	val string_of_code : t -> string
 (** Conversion chaine de caracteres vers code (pour saisie)
