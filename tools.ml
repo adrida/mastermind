@@ -12,17 +12,12 @@ let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
  * @param taille de la liste desirer et la liste complete
  * @return genere une liste de coup possible avec redondance
  *)
-let rec avec_redondance taille listC=
-let rec construire_aux list= 
-match list with
+let rec avec_redondance taille listC= let rec construire_aux list= match list with
 	|[]->[]
-|h::t->(Rouge::h)::(Bleu::h)::(Vert::h)::(Noir::h)::(Jaune::h)::(Orange::h)::(Violet::h)::(Blanc::h)::(construire_aux t)
-	in match taille with 
+	|h::t->(Rouge::h)::(Bleu::h)::(Vert::h)::(Noir::h)::(Jaune::h)::(Orange::h)::(Violet::h)::(Blanc::h)::(construire_aux t) in match taille with 
 	|1 -> listC
-	|_-> if taille>=1 then
-construire_aux (avec_redondance (taille-1) listC)
-	else 
-	failwith "Erreur de taille"
+	|_-> if taille>=1 then construire_aux (avec_redondance (taille-1) listC)
+	else failwith "Erreur de taille"
 
 	(** Création de la fonction de comparaison
 	 * @param une liste de couleur
@@ -38,15 +33,9 @@ construire_aux (avec_redondance (taille-1) listC)
 	 * @return une liste sans repetition de couleurs
 
 	 *)
-	let rec  sans_redondance list comp =
-	let rec aux l res=
-	match l with 
+	let rec  sans_redondance list comp =let rec aux l res= match l with 
 	|[]->res
-	|h::t->if not(comp h) then
-	aux t res
-	else
-aux t (h::res)
-	in aux list []
+	|h::t->if not(comp h) then aux t res else aux t (h::res) in aux list []
 	(** Supprime la 1ere occurence de e dans l
 	 * @param une couleur et une liste
 	 * @return l sans la presence de l'element e
