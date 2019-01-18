@@ -22,7 +22,7 @@ let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
 	|_-> if taille>=1 then
 construire_aux (avec_redondance (taille-1) listC)
 	else 
-	failwith "Erreur taille trop petite"
+	failwith "Erreur de taille"
 
 (** Création de la fonction de comparaison
 * @param une liste de couleur
