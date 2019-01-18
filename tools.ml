@@ -13,10 +13,10 @@ let listePion= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc]]
  * @return genere une liste de coup possible avec redondance
  *)
 let rec avec_redondance taille listC= let rec construire_aux list= match list with
-	|[]->[]
-	|h::t->(Rouge::h)::(Bleu::h)::(Vert::h)::(Noir::h)::(Jaune::h)::(Orange::h)::(Violet::h)::(Blanc::h)::(construire_aux t) in match taille with 
+|[]->[]
+|h::t->(Rouge::h)::(Bleu::h)::(Vert::h)::(Noir::h)::(Jaune::h)::(Orange::h)::(Violet::h)::(Blanc::h)::(construire_aux t) in match taille with 
 	|1 -> listC
-	|_-> if taille>=1 then construire_aux (avec_redondance (taille-1) listC)
+|_-> if taille>=1 then construire_aux (avec_redondance (taille-1) listC)
 	else failwith "Erreur de taille"
 
 	(** Création de la fonction de comparaison
