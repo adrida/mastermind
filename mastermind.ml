@@ -156,12 +156,27 @@ aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 * @return le jeux 
 *)
 
+
 	let mastermind nom_joueur coup_max nb_parties auto =
 	Sys.command "clear";
 	print_string "MASTERMIND \n";
-	print_string "=====BIENVENUE A TOI ";
+	print_string "=====   BIENVENUE A VOUS ";
 	print_string nom_joueur;
 	print_string "   =====\n\n\n\n";
 	menu nom_joueur coup_max nb_parties auto listeComplete listeSR listeComplete1recuperee listeRAN;
 	Sys.command "clear";;
+
+	(** commandes pour plus de claretee dans l'affichage
+	*)
+	Sys.command "clear";;
+	print_string "\n\n /!\\ >> Pour lancer une partie appeler sur la console ocaml la fonction mastermind de cette maniere :  \n\n
+	  >> # mastermind nom_joueur coup_max nb_parties auto \n\n
+	  nom_joueur : Votre nom ;) \n
+	  coup_max : Le nombre de coups maximum pour deviner le code \n
+	  nb_parties : Le nombre de parties souhaitees (PAS IMPLEMENTE POUR L'INSTANT) \n
+	  auto : true ou false - permet de preciser si vous voulez que les reponses soient calculees de maniere automatiques ou non \n
+	               ---> ATTENTION SEUL LE MODE FALSE FONCTIONNE \n\n";;
+
+
+
 
