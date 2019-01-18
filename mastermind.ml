@@ -5,12 +5,10 @@ exception Tricherie;;
 	(**fonction : proposition *)
 	(** fonction de jeu: affichage de la propostion *)
 	(** test Tricherie et combinaison caché *)
-	(** elagage de la liste en fonction de bp et mp *)
+	(** resolution de la liste en fonction de pl_corr et pl_mauvais *)
 
 (**-> COMPARER listeRAN et La liste que lordi teste *) 
 	let jouer_true nbcoup liste listerep= 
-(**-> COMPARER listeRAN et La liste que lordi teste *) 
-
 	let rec aux n l =
 	match (n,l) with
 	|_,[]-> raise Tricherie
@@ -33,11 +31,11 @@ exception Tricherie;;
 	print_string "\n";
 	print_string "Nombre de pion(s) bien placé(s):\n";
 	try
-	let bp= fst (indications listerep liste) in
+	let pl_corr= fst (ft_data_game listerep liste) in
 	print_string "Nombre de pions(s) mal placé(s):\n";
-	let mp= snd (indications listerep liste) in
+	let pl_mauvais= snd (ft_data_game listerep liste) in
 	print_newline();
-aux (x + 1) (Tools.elagage prop (bp,mp) l)
+aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
@@ -69,11 +67,11 @@ aux (x + 1) (Tools.elagage prop (bp,mp) l)
 	print_string "\n";
 	print_string "Nombre de pion(s) bien placé(s):\n";
 	try
-	let bp=read_int() in
+	let pl_corr=read_int() in
 	print_string "Nombre de pions(s) mal placé(s):\n";
-	let mp=read_int() in
+	let pl_mauvais=read_int() in
 	print_newline();
-aux (x + 1) (Tools.elagage prop (bp,mp) l)
+aux (x + 1) (Tools.resolution prop (pl_corr,pl_mauvais) l)
 	with Failure("int_of_string") ->print_string "Erreur de saisie!\n"; aux x l;
 	in aux 1 liste;;
 
